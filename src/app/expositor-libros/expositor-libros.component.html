@@ -1,0 +1,11 @@
+<h1>Expositor de libros</h1>
+
+<button mat-raised-button color="primary" (click)="modoElegido='Comprar'">Comprar</button>
+<button mat-raised-button color="primary" (click)="cambiarModo('Consultar')">Consultar</button>
+
+
+<div *ngIf="modoElegido === 'Comprar'">
+    <h3>Compra de libros:</h3>
+
+
+</div>
