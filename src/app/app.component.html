@@ -1,1 +1,21 @@
-<router-outlet></router-outlet>
+<!-- Mi barra de navegación -->
+<mat-toolbar color="primary">
+    <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Mi libreria</span>
+</mat-toolbar>
+
+<mat-drawer-container>
+    <mat-drawer #drawer>
+        <!-- Elementos del menú, con routerLink permitimos hacer redirección-->
+        <div class="elementoBarra" [routerLink]="['login']" (click)="drawer.toggle()">Inicio de sesión</div>
+        <div class="elementoBarra" [routerLink]="['expositorLibros']" (click)="drawer.toggle()">Expositor</div>
+        <div class="elementoBarra" [routerLink]="['creacionLibro']" (click)="drawer.toggle()">Creación libro</div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div ></div>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+

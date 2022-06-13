@@ -1,0 +1,20 @@
+mat-toolbar{
+    height: 7vh;
+  }
+  mat-drawer{
+    height: 93vh;
+    width: 10vw;
+    padding-top: 2vh;
+    background-color: whitesmoke;
+  }
+  mat-drawer-content{
+    height: 93vh;
+    padding: 2vw;
+  }
+  .elementoBarra{
+    border-bottom: 2px solid black;
+    padding: 12px 24px;
+    margin-bottom: 2vh;
+    cursor: pointer;
+  }
+  
