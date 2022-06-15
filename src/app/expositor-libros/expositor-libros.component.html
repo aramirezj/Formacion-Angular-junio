@@ -1,28 +1,25 @@
 <h1>Expositor de libros</h1>
 
 <button mat-raised-button color="primary" (click)="modoElegido='Comprar'">Comprar</button>
-<button mat-raised-button color="primary" (click)="cambiarModo('Consultar')">Consultar</button>
+<button mat-raised-button color="primary" (click)="cambiarModo('Consulta')">Consultar</button>
+<!-- Condiciones de Angular -->
+<div *ngIf="modoElegido === 'Comprar'">
+    <h3>Compra de libros:</h3>
+    <p>Cantidad productos: {{librosComprados.length}}</p>
+    <p>Precio total: {{precioTotal}}</p>
 
+</div>
 <div class="clear"></div>
 <!-- Bucles de Angular, se llaman con *ngFor, se declara una variable del listado
 Se duplica la etiqueta por cada iteración
 -->
-<mat-card *ngFor="let libro of librosOfrecidos">
-    <mat-card-title>{{libro.titulo | uppercase}}</mat-card-title>
-    <mat-card-subtitle>Autor: {{libro.autor}}</mat-card-subtitle>
-    <mat-card-subtitle>Precio: {{libro.precio}}€</mat-card-subtitle>
-    <mat-card-subtitle>Stock: {{libro.stock}}</mat-card-subtitle>
-    <mat-card-actions>
-        <button mat-raised-button color="primary">Comprar</button>
-        <button mat-raised-button color="accent">Añadir</button>
-        <button mat-raised-button color="warn">Restar</button>
-    </mat-card-actions>
-</mat-card>
+
+
+<app-libro *ngFor="let libro of librosOfrecidos"
+ [libro]="libro" titulo2="cien años" [modoElegido]="modoElegido"
+  (libroComprado)="compraLibro($event)"></app-libro>
+<!-- Componente libro, (libroComprado) es un evento disparado por el
+    componente, podemos luego asignar que se ejecute el código que queramos-->
+
 <div class="clear"></div>
 
-<!-- Condiciones de Angular -->
-<div *ngIf="modoElegido === 'Comprar'">
-    <h3>Compra de libros:</h3>
-
-
-</div>

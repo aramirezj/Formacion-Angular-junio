@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Libro } from '../interfaces/Libro';
+import { LibroService } from '../servicios/libro.service';
 
 @Component({
     selector: 'app-expositor-libros',
@@ -8,19 +10,69 @@ import { Libro } from '../interfaces/Libro';
 })
 export class ExpositorLibrosComponent implements OnInit {
     modoElegido: string = 'Consulta';
-    librosOfrecidos:Libro[];
-    constructor() { }
+    librosOfrecidos: Libro[];
+    libroEsp: Libro = { titulo: 'Cien años de soledad', autor: 'Gabriel Garcia Marquez', precio: 30, stock: 4 };
+
+
+
+
+
+
+
+
+    //
+    librosComprados: Libro[] = [];
+    precioTotal: number = 0;
+
+
+    constructor(
+        private libroService:LibroService
+    ) { }
 
     ngOnInit(): void {
-        const libro1: Libro = { titulo: 'Cien años de soledad', autor: 'Gabriel Garcia Marquez', precio: 30, stock: 4 };
-        const libro2: Libro = { titulo: 'El relato de un naufrago', autor: 'Gabriel Garcia Marquez', precio: 20, stock: 7 };
-        this.librosOfrecidos = [libro1];
-        this.librosOfrecidos.push(libro2);
-        this.librosOfrecidos.push({ titulo: 'El lazarillo de tormes', precio: 5, stock: 10 });
+        console.log(this.libroService.variable1)
+        this.libroService.variable1 = 'hola don pepito'
+
+
+    
+
+        this.libroService.recuperaLibrosOBS().subscribe(librosBBDD => {
+            //ESTE BLOQUE DE CODIGO SE EJEUCTA CUANDO RECIBO LA INFORMACIÓN
+            this.librosOfrecidos = librosBBDD;
+        });
+
+
+
     }
+
+
+
+    /**
+ * Función que se lanza cuando un libro notifica al componente que se
+ * ha comprado y tenemos que añadirlo a nuestro carrito
+ * @param libro Libro que ha sido comprado 
+ */
+    compraLibro(libro: Libro) {
+        this.librosComprados.push(libro);
+        this.precioTotal += libro.precio;
+    }
+
+
+
+
+
+
+
+
+
+
 
     cambiarModo(opcion: string) {
         this.modoElegido = opcion;
     }
+
+
+
+
 
 }

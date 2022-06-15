@@ -1,1 +1,51 @@
-<p>creacion-libro works!</p>
+<form [formGroup]="formularioCreacion">
+    <h1>Formulario de creación de libro</h1>
+    <p>Estado del formulario {{formularioCreacion.valid}}</p>
+    <!-- Campo titulo -->
+    <mat-form-field>
+      <mat-label>Titulo</mat-label>
+      <input matInput formControlName="titulo">
+  
+      <mat-error *ngIf="formularioCreacion.get('titulo')?.hasError('required')">
+        Este campo es obligatorio</mat-error>
+      <mat-error *ngIf="formularioCreacion.get('titulo')?.hasError('maxlength')">
+        Este campo no debe tener más de 6 caracteres</mat-error>
+    </mat-form-field>
+  
+    <!-- Campo autor -->
+    <mat-form-field>
+      <mat-label>Autor</mat-label>
+      <input matInput formControlName="autor">
+      <mat-error *ngIf="formularioCreacion.get('autor')?.hasError('maxlength')">
+        Este campo no debe tener más de 6 caracteres</mat-error>
+    </mat-form-field>
+  
+    <!-- Campo precio -->
+    <mat-form-field>
+      <mat-label>Precio</mat-label>
+      <input matInput formControlName="precio">
+  
+      <mat-error *ngIf="formularioCreacion.get('precio')?.hasError('required')">
+        Este campo es obligatorio</mat-error>
+    </mat-form-field>
+  
+    <!-- Campo stock -->
+    <mat-form-field>
+      <mat-label>Stock</mat-label>
+      <input matInput formControlName="stock">
+  
+      <mat-error *ngIf="formularioCreacion.get('stock')?.hasError('required')">
+        Este campo es obligatorio</mat-error>
+    </mat-form-field>
+  
+  
+    <button [disabled]="formularioCreacion.invalid" (click)="creaLibro()" mat-raised-button color="primary">Crear
+      libro</button>
+  </form>
+  
+  
+  <div *ngIf="libroCreado">
+  <h1>Libro creado:</h1>
+
+  </div>
+  
